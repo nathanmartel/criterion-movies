@@ -1,23 +1,18 @@
-const criterionDirectors = ('./criterionMovies-directors.json');
-const criterionFilms = ('./criterionMovies-films.json');
-const Director = ('../lib/models/Director');
-const Film = ('../lib/models/Director');
+const criterionDirectors = require('./criterionMovies-directors-test.json');
+const criterionFilms = require('./criterionMovies-films-test.json');
+const Director = require('../lib/models/Director');
+const Film = require('../lib/models/Film');
 
 module.exports = async() => {
-  criterionDirectors.forEach(director => {
-    Director.create({
-      name: director.name,
-      country: director.country
-    });
-  });
-  criterionFilms.forEach(film => {
-    Film.create({
-      title: film.title,
-      directory: film.director,
-      duration: film.duration,
-      year: film.year,
-    });
-  });
+  await Director.create(criterionDirectors.map(director => ({
+    name: director.name,
+    country: director.country
+  })));
+  
+  await Film.create(criterionFilms.map(film => ({
+    title: film.title,
+    director: film.director,
+    duration: film.duration,
+    year: film.year
+  })));
 };
-
-// Or invert this and do the create via .map?
