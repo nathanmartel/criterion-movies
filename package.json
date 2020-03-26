@@ -1,5 +1,5 @@
 {
-  "name": "criterion-movies/",
+  "name": "criterion-movies",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,7 +10,11 @@
     "start:watch": "nodemon server.js"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__not-tests__/"
+    ]
   },
   "keywords": [],
   "author": "",
